@@ -2,8 +2,6 @@ package foneapijavawrapper.callbacks;
 
 import java.util.ArrayList;
 
-import javax.security.auth.callback.Callback;
-
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
