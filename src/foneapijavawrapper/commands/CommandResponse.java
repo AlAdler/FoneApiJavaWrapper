@@ -28,13 +28,4 @@ public class CommandResponse {
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
-
-	/*
-	 * [JsonProperty("status")] 
-	 * public int status; 
-	 * [JsonProperty("call_id")]
-	 * public string callId;
-	 * [JsonProperty("error_msg")] 
-	 * public string errorMsg;
-	 */
 }
