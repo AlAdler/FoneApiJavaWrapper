@@ -43,12 +43,18 @@ public class CallBackResponse {
         settings.add(limitCallSetting);
 	}
 
-	public void Answer() {
+	public void answer() {
 		AnswerAction answerAction = new AnswerAction();
 		actions.add(answerAction);
 	}
+	
+	public void dial(String numbers, String callerId, String url, Boolean record)
+    {
+        DialAction dialAction = new DialAction(numbers, callerId, url, record);
+        actions.add(dialAction);
+    }
 
-	public void BridgeTo(String otherCallId, String url) {
+	public void bridgeTo(String otherCallId, String url) {
 		BridgeToAction bridgeToAction = new BridgeToAction(otherCallId, url);
 		actions.add(bridgeToAction);
 	}
