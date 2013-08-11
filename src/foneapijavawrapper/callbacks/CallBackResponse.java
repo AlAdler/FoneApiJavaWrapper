@@ -24,7 +24,6 @@ public class CallBackResponse {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		Gson gson = new Gson();
 		return gson.toJson(this);
 	}

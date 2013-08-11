@@ -12,6 +12,9 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
+import foneapijavawrapper.utils.CustomParameter;
+import foneapijavawrapper.utils.Utils;
+
 public class FoneApiClient {
 
 	private static final String DIAL_RESOURCE = "dial//";
@@ -28,17 +31,19 @@ public class FoneApiClient {
 	public CommandResponse dial(eDialDestinationType destinationType,
 			String destination, String url, Integer appId, String fallbackUrl,
 			Integer dialTimeout, String callerIdNum, String callerIdName,
-			Integer delay, String trunk) {
+			Integer delay, String trunk, CustomParameter...customParameters) {
 		CommandResponse retVal = null;
 		try {
 			MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
 			queryParams.add(DialParams.DEST_TYPE, destinationType.toString());
 			queryParams.add(DialParams.DEST, destination);
+			url = Utils.addCustomParamsToUrl(url, customParameters);
 			queryParams.add(DialParams.URL, url);
 			queryParams.add(DialParams.APP_ID, appId.toString());
 			queryParams.add(DialParams.TRUNK, trunk);
             if (fallbackUrl != null && fallbackUrl != "")
             {
+            	fallbackUrl = Utils.addCustomParamsToUrl(fallbackUrl, customParameters);
             	queryParams.add(DialParams.FALLBACK_URL, fallbackUrl);
             }
             if (dialTimeout != null)
