@@ -11,4 +11,5 @@ class DialParams {
 	static final String CALLER_ID_NAME = "caller_id_name";
 	static final String DELAY = "delay";
 	static final String TRUNK = "trunk";
+	static final String RELATED_CALL_ID = "related_call_id";
 }

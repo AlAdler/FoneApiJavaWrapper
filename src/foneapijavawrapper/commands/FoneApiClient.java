@@ -31,7 +31,8 @@ public class FoneApiClient {
 	public CommandResponse dial(eDialDestinationType destinationType,
 			String destination, String url, Integer appId, String fallbackUrl,
 			Integer dialTimeout, String callerIdNum, String callerIdName,
-			Integer delay, String trunk, CustomParameter...customParameters) {
+			Integer delay, String trunk, String relatedCallId,
+			CustomParameter... customParameters) {
 		CommandResponse retVal = null;
 		try {
 			MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -41,27 +42,27 @@ public class FoneApiClient {
 			queryParams.add(DialParams.URL, url);
 			queryParams.add(DialParams.APP_ID, appId.toString());
 			queryParams.add(DialParams.TRUNK, trunk);
-            if (fallbackUrl != null && fallbackUrl != "")
-            {
-            	fallbackUrl = Utils.addCustomParamsToUrl(fallbackUrl, customParameters);
-            	queryParams.add(DialParams.FALLBACK_URL, fallbackUrl);
-            }
-            if (dialTimeout != null)
-            {
-                queryParams.add(DialParams.DIAL_TIMEOUT, dialTimeout.toString());
-            }
-            if (callerIdNum != null && callerIdNum != "")
-            {
-                queryParams.add(DialParams.CALLER_ID_NUM, callerIdNum);
-            }
-            if (callerIdName != null && callerIdName != "")
-            {
-                queryParams.add(DialParams.CALLER_ID_NAME, callerIdName);
-            }
-            if (delay != null)
-            {
-                queryParams.add(DialParams.DELAY, delay.toString());
-            }
+			if (fallbackUrl != null && fallbackUrl != "") {
+				fallbackUrl = Utils.addCustomParamsToUrl(fallbackUrl,
+						customParameters);
+				queryParams.add(DialParams.FALLBACK_URL, fallbackUrl);
+			}
+			if (dialTimeout != null) {
+				queryParams
+						.add(DialParams.DIAL_TIMEOUT, dialTimeout.toString());
+			}
+			if (callerIdNum != null && callerIdNum != "") {
+				queryParams.add(DialParams.CALLER_ID_NUM, callerIdNum);
+			}
+			if (callerIdName != null && callerIdName != "") {
+				queryParams.add(DialParams.CALLER_ID_NAME, callerIdName);
+			}
+			if (delay != null) {
+				queryParams.add(DialParams.DELAY, delay.toString());
+			}
+			if (relatedCallId != null && relatedCallId != "") {
+				queryParams.add(DialParams.RELATED_CALL_ID, relatedCallId);
+			}
 			ClientResponse response = service.queryParams(queryParams)
 					.path(DIAL_RESOURCE).accept(MediaType.APPLICATION_JSON)
 					.get(ClientResponse.class);
@@ -81,7 +82,8 @@ public class FoneApiClient {
 		return retVal;
 	}
 
-	private CommandResponse instantiateCommandResponeFromJson(ClientResponse response) {
+	private CommandResponse instantiateCommandResponeFromJson(
+			ClientResponse response) {
 		String json = response.getEntity(String.class);
 		Gson gson = new Gson();
 		return gson.fromJson(json, CommandResponse.class);

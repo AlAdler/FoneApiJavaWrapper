@@ -9,7 +9,7 @@ class DialAction extends Action {
 	@SerializedName("dial")
 	private DialProperties properties;
 
-	DialAction(String numbers, String callerId, String url, Boolean record, CustomParameter...customParameters) {
+	DialAction(String numbers, String callerId, String url, Boolean record, CustomParameter... customParameters) {
 		properties = new DialProperties();
 		properties.numbers = numbers;
 		properties.callerId = callerId;
